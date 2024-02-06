@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import AddBarPanel from './components/AddBarPanel';
+import BodyTodoTable from './components/BodyTodoTable';
+import NavbarPanel from './components/NavbarPanel';
 import './index.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h1 className="bg-pink-300">Hallo</h1>
+      <NavbarPanel />
+      <AddBarPanel />
+      <BodyTodoTable />
     </>
   );
 }

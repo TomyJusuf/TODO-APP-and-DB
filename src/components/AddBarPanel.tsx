@@ -1,7 +1,7 @@
 export default function AddBarPanel() {
   return (
-    <div className=" container mx-auto w-[800px] mt-12">
-      <div className="input_table   flex justify-center ">
+    <div className="container mx-auto w-[810px] mt-12">
+      <div className="input_table flex justify-center ">
         <input
           type="text"
           name=""
