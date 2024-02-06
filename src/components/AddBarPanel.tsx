@@ -1,30 +1,26 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useState } from 'react';
+import { postItems } from '../hooks/postItem';
+import { Data } from '../types/type';
 
 const schema = yup.object().shape({
-  input: yup.string().min(1).required(),
+  title: yup.string().min(1).required(),
 });
 
-type Data = {
-  input: string;
-};
-
 export default function AddBarPanel() {
-  const [inputData, setInputData] = useState<any>();
-
+  const { mutate: postItemData } = postItems();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Data>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: Data) => {
-    setInputData(data); // Update the state to trigger a re-render
+  const onSubmit: SubmitHandler<Data> = (data) => {
+    postItemData(data); // Update the state to trigger a re-render
   };
 
-  console.log(inputData);
+  // console.log(inputData);
   return (
     <div className="container mx-auto w-[810px] mt-12">
       <form
@@ -36,9 +32,9 @@ export default function AddBarPanel() {
           id=""
           placeholder="Add task"
           className="bg-slate-300 w-10/12  pl-5"
-          {...register('input')}
+          {...register('title')}
         />
-        {errors.input && (
+        {errors.title && (
           <p className="absolute mt-12 text-red-600">
             * This field is required ,minimal characters 5 letters*
           </p>
