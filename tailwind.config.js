@@ -3,6 +3,7 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {},
+    container: true,
   },
   plugins: [],
 };
