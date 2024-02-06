@@ -1,20 +1,20 @@
-import { useState } from 'react';
 type Data = {
   importData: string | boolean | any;
 };
 
 export default function BodyTodoTable({ importData }: Data) {
-  console.log(importData);
-
   return (
     <div className="container mx-auto w-[800px] mt-12">
       {/* start */}
-      {importData.map((item: any) => {
+      {importData.map((item: any, index: number) => {
         const { title, isDone } = item.attributes;
-        console.log(title);
 
         return isDone ? (
-          <div className="task_table w-full  border-4 border-violet-900 flex justify-between px-6 py-4 my-2">
+          <div
+            className="task_table w-full  border-4 border-violet-900 flex justify-between px-6 py-4 my-2"
+            key={index}
+            data-id={index}
+          >
             <div className="task_table_inputs flex justify-start items-center ">
               <div className="cube w-4 h-4 bg-violet-300 mr-10"></div>
               <div className="relative">
@@ -49,7 +49,11 @@ export default function BodyTodoTable({ importData }: Data) {
             </div>
           </div>
         ) : (
-          <div className="task_table w-full  border-4 border-violet-900 flex justify-between px-6 py-4 my-2">
+          <div
+            className="task_table w-full  border-4 border-violet-900 flex justify-between px-6 py-4 my-2"
+            key={index}
+            data-id={index}
+          >
             <div className="task_table_inputs flex justify-start items-center ">
               {' '}
               <div className="cube w-4 h-4 bg-violet-600 mr-10"></div>
