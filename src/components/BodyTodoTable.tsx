@@ -1,4 +1,33 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 export default function BodyTodoTable() {
+  const [artists, setArtists] = useState<any>({});
+
+  const getData = async () => {
+    try {
+      const response = await axios.get('http://localhost:1337/api/todos');
+      // console.log(response.data);
+      setArtists(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('Data not found');
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  console.log(artists.data);
+  const arr: any | undefined = artists.data;
+
+  if (arr === undefined) {
+    return false;
+  }
+  arr.map((element: any) => {
+    console.log(element.attributes);
+  });
   return (
     <div className="container mx-auto w-[800px] mt-12">
       <div className="task_table w-full  border-4 border-violet-500 flex justify-between px-6 py-4 my-2">
