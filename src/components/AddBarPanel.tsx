@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, UseFormProps, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { postItems } from '../hooks/postItem';
@@ -6,6 +6,7 @@ import { Data } from '../types/type';
 
 const schema = yup.object().shape({
   title: yup.string().min(1).required(),
+  isDone: yup.boolean(),
 });
 
 export default function AddBarPanel() {
@@ -14,13 +15,18 @@ export default function AddBarPanel() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Data>({ resolver: yupResolver(schema) });
+  } = useForm<Data>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      title: '',
+      isDone: false, // Set your default value for isDone
+    },
+  } as UseFormProps<Data>);
 
   const onSubmit: SubmitHandler<Data> = (data) => {
     postItemData(data); // Update the state to trigger a re-render
   };
 
-  // console.log(inputData);
   return (
     <div className="container mx-auto w-[810px] mt-12">
       <form
