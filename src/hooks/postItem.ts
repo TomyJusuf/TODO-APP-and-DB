@@ -10,7 +10,7 @@ const postData = async (data: Data) => {
     const response = await axios.post('http://localhost:1337/api/todos', {
       data,
     });
-    // console.log(response.data);
+    console.log(response.data);
 
     return response.data.data;
   } catch (error) {
